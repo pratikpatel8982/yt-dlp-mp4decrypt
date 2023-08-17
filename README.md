@@ -33,3 +33,11 @@ yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or
 ```
 
 Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line. `mp4decrypt` will automatically decrypt the file using the correct `keys` from `keys.txt`
+
+## keys.txt Sample:
+If you're decrypting using keys from a file, the `keys.txt` file should contain keys in the format `kid:key`, with each key on a separate line. Here's a sample `keys.txt` file:
+`kid1:key1
+kid2:key2
+kid3:key3
+kid4:key4
+kid5:key5`
