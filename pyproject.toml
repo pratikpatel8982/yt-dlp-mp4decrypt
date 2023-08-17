@@ -1,4 +1,6 @@
-[tool.poetry]
-...
-packages = [{ include = "yt_dlp_plugins" }]
-...
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.distutils.bdist_wheel]
+universal = true
