@@ -1,5 +1,9 @@
 This is a plugin for yt-dlp that enables decryption of encrypted MP4 files using the `mp4decrypt` command-line tool.
 
+## Prerequisites
+
+Before using this plugin, ensure that you have the `mp4decrypt` executable added to your system's PATH. You can download the `mp4decrypt` tool from the [Bento4](https://www.bento4.com/) website and follow their installation instructions.
+
 ## Installation
 
 You can install this plugin directly from the GitHub repository using the following command:
@@ -20,7 +24,7 @@ To use this plugin, you can pass the `--use-post-processor` option along with th
 yt-dlp --use-post-processor MP4Decrypt:key=your_key <video_url>
 ```
 
-Replace `your_key` with your actual decryption key.
+Replace `your_key` with your actual decryption key in the format `kid:key`.
 
 ### Decrypt using keys from a file:
 
@@ -28,4 +32,4 @@ Replace `your_key` with your actual decryption key.
 yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url>
 ```
 
-Replace `/path/to/keys.txt` with the actual path to your keys file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line.
+Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line.
