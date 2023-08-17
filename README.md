@@ -1,4 +1,4 @@
-This is a plugin for yt-dlp that enables decryption of encrypted MP4 files using the `mp4decrypt` command-line tool.
+This is a plugin for yt-dlp that enables decryption of encrypted MP4 files using the `mp4decrypt` command-line tool. The files will be decrypted instantly after download and will replace the encrypted files.
 
 ## Prerequisites
 
@@ -26,10 +26,10 @@ yt-dlp --use-post-processor MP4Decrypt:key=your_key <video_url>
 
 Replace `your_key` with your actual decryption key in the format `kid:key`.
 
-### Decrypt using keys from a file:
+### Decrypt using keys from a file (Useful when downloading a Playlist):
 
 ```bash
-yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url>
+yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or playlist_url>
 ```
 
-Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line.
+Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line. `mp4decrypt` will automatically decrypt the file using the correct `keys` from `keys.txt`
