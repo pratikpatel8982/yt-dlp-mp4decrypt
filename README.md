@@ -16,7 +16,7 @@ Make sure you have Python 3.6+ installed before running this command.
 
 ## Usage
 
-To use this plugin, you can pass the `--use-post-processor` option along with the `MP4Decrypt` plugin name and the required arguments.
+To use this plugin, make sure you place the `--use-post-processor` option before any other arguments to avoid any issues. Here are the correct usage instructions:
 
 ### Decrypt using a single key:
 
