@@ -26,7 +26,7 @@ yt-dlp --use-post-processor MP4Decrypt:key=your_key <video_url>
 
 Replace `your_key` with your actual decryption key in the format `kid:key`.
 
-### Decrypt using keys from a file (Useful when downloading a Playlist):
+### Decrypt using keys from `keys.txt`(Useful when downloading a Playlist):
 
 ```shell
 yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or playlist_url>
