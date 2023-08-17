@@ -1,4 +1,4 @@
-This is a plugin for yt-dlp that enables decryption of encrypted MP4 files using the `mp4decrypt` command-line tool. The files will be decrypted instantly after download and will replace the encrypted files.
+This is a plugin for yt-dlp that enables decryption of encrypted audio and video files using the `mp4decrypt` command-line tool. The files will be decrypted instantly after download and will replace the encrypted files.
 
 ## Prerequisites
 
