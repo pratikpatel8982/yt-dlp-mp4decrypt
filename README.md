@@ -1,10 +1,3 @@
-```markdown
-# yt-dlp MP4Decrypt Plugin
-
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python Version](https://img.shields.io/badge/python-3.6%2B-blue.svg)
-![yt-dlp Version](https://img.shields.io/badge/yt--dlp-2021.09.06%2B-blue.svg)
-
 This is a plugin for yt-dlp that enables decryption of encrypted MP4 files using the `mp4decrypt` command-line tool.
 
 ## Installation
