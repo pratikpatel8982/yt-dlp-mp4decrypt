@@ -8,7 +8,7 @@ Before using this plugin, ensure that you have the `mp4decrypt` executable added
 
 You can install this plugin directly from the GitHub repository using the following command:
 
-```bash
+```shell
 python -m pip install -U https://github.com/pratikpatel8982/yt-dlp-mp4decrypt/archive/master.zip
 ```
 
@@ -20,7 +20,7 @@ To use this plugin, make sure you place the `--use-post-processor` option before
 
 ### Decrypt using a single key:
 
-```bash
+```shell
 yt-dlp --use-post-processor MP4Decrypt:key=your_key <video_url>
 ```
 
@@ -28,13 +28,13 @@ Replace `your_key` with your actual decryption key in the format `kid:key`.
 
 ### Decrypt using keys from a file (Useful when downloading a Playlist):
 
-```bash
+```shell
 yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or playlist_url>
 ```
 
 Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line. `mp4decrypt` will automatically decrypt the file using the correct `keys` from `keys.txt`
 
-## keys.txt Sample:
+#### keys.txt Sample:
 If you're decrypting using keys from a file, the `keys.txt` file should contain keys in the format `kid:key`, with each key on a separate line. Here's a sample `keys.txt` file:
 ```shell
 kid1:key1
