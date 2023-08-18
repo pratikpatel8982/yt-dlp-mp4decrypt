@@ -50,7 +50,7 @@ class MP4DecryptPP(PostProcessor):
             cmd = ["mp4decrypt"]
             for key in keys:
                 cmd.extend(["--key", key])
-            cmd.extend([filepath, output_file])
+            cmd.extend([f'"{filepath}"', f'"{output_file}"'])
             subprocess.run(cmd, check=True)
             return output_file
         except subprocess.CalledProcessError:
