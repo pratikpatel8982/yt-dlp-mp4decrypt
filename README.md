@@ -14,7 +14,7 @@ python -m pip install -U https://github.com/pratikpatel8982/yt-dlp-mp4decrypt/ar
 
 Make sure you have Python 3.6+ installed before running this command.
 
-##BUGS
+## BUGS
 
 Don't use the `+` operator when specifying format in `-f "wv+wa"`. Use `,` instead like this `-f "wv,wa"`.
 
