@@ -16,12 +16,12 @@ Make sure you have Python 3.6+ installed before running this command.
 
 ## Usage
 
-To use this plugin, make sure you place the `--use-post-processor` option before any other arguments to avoid any issues. Here are the correct usage instructions:
+To use this plugin, make sure you place the `--use-postprocessor` option before any other arguments to avoid any issues. Here are the correct usage instructions:
 
 ### Decrypt using a single key:
 
 ```shell
-yt-dlp --use-post-processor MP4Decrypt:key=your_key <video_url>
+yt-dlp --use-postprocessor MP4Decrypt:key=your_key <video_url>
 ```
 
 Replace `your_key` with your actual decryption key in the format `kid:key`.
@@ -29,7 +29,7 @@ Replace `your_key` with your actual decryption key in the format `kid:key`.
 ### Decrypt using keys from `keys.txt`(Useful when downloading a Playlist):
 
 ```shell
-yt-dlp --use-post-processor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or playlist_url>
+yt-dlp --use-postprocessor MP4Decrypt:keyfile="/path/to/keys.txt" <video_url or playlist_url>
 ```
 
 Replace `/path/to/keys.txt` with the actual path to your `keys.txt` file. Make sure `keys.txt` contains keys in the format `kid:key`, one per line. `mp4decrypt` will automatically decrypt the file using the correct `keys` from `keys.txt`
