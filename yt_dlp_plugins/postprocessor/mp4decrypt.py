@@ -9,52 +9,66 @@ class MP4DecryptPP(PostProcessor):
 
     def run(self, info):
         filepath = info.get('filepath')
+        
         if filepath:
-            decrypted_filepath = self.decrypt_file(filepath)
-            if decrypted_filepath:
-                decryption_key = self._kwargs.get('key', [])
-                if 'keyfile' in self._kwargs:
-                    self.to_screen(f'Decryption successful for {filepath!r} with keyfile: {self._kwargs["keyfile"]}')
+            if 'decryption_key' in self._kwargs:
+                decryption_key = self._kwargs['decryption_key']
+                success = self.decrypt_single_key(filepath, decryption_key)
+                if success:
+                    self.to_screen(f'Decryption successful for "{filepath}" using decryption_key: {decryption_key}')
                 else:
-                    self.to_screen(f'Decryption successful for {filepath!r} with key: {decryption_key}')
-                os.remove(filepath)
-                os.rename(decrypted_filepath, filepath)
+                    self.to_screen(f'Decryption failed for "{filepath}" using decryption_key: {decryption_key}')
+            elif 'keyfile' in self._kwargs:
+                keyfile = self._kwargs['keyfile']
+                if os.path.exists(keyfile):
+                    success = self.decrypt_with_keyfile(filepath, keyfile)
+                    if success:
+                        self.to_screen(f'Decryption successful for "{filepath}" using keyfile: "{keyfile}"')
+                    else:
+                        self.to_screen(f'Decryption failed for "{filepath}" using keyfile  "{keyfile}"')
+                else:
+                    self.to_screen(f'Keyfile not found: "{keyfile}"')
             else:
-                decryption_key = self._kwargs.get('key', [])
-                if 'keyfile' in self._kwargs:
-                    self.to_screen(f'Decryption failed for {filepath!r} with keyfile: {self._kwargs["keyfile"]}')
-                else:
-                    self.to_screen(f'Decryption failed for {filepath!r} with key: {decryption_key}')
+                self.to_screen("No decryption key or keyfile provided.")
+                return [], info
+        
         else:
             filepath = info.get('_filename')
-            self.to_screen(f'Pre-processed {filepath!r} with {self._kwargs}')
+            self.to_screen(f'Pre-processed "{filepath}" with {self._kwargs}')
+        
         return [], info
 
-    def decrypt_file(self, filepath):
-        decryption_key = self._kwargs.get('key', [])
-        keys_file = self._kwargs.get('keyfile')
-        
-        if keys_file and not decryption_key:
-            if os.path.exists(keys_file):
-                with open(keys_file) as f:
-                    keys = f.read().splitlines()
-            else:
-                raise FileNotFoundError(f"Key file '{keys_file}' not found.")
-        elif decryption_key and not keys_file:
-            keys = [decryption_key]
-        else:
-            return None
-        
-        output_file = f"{os.path.splitext(filepath)[0]}_decrypted{os.path.splitext(filepath)[1]}"
+    def decrypt_single_key(self, filepath, decryption_key):
         try:
+            output_file = f"{os.path.splitext(filepath)[0]}_decrypted{os.path.splitext(filepath)[1]}"
+            cmd = ["mp4decrypt", "--key", decryption_key, filepath, output_file]
+            #USE FOR DEBUGGING PURPOSES
+            #self.to_screen(f'Executing command: {" ".join(cmd)}')
+            subprocess.run(cmd, check=True)
+            os.remove(filepath)
+            os.rename(output_file, filepath)
+            return True
+        except subprocess.CalledProcessError:
+            return False
+
+    def decrypt_with_keyfile(self, filepath, keyfile):
+        try:
+            with open(keyfile, 'r') as f:
+                keys = f.read().splitlines()
+            
+            output_file = f"{os.path.splitext(filepath)[0]}_decrypted{os.path.splitext(filepath)[1]}"
             cmd = ["mp4decrypt"]
             for key in keys:
                 cmd.extend(["--key", key])
-            cmd.extend([f'"{filepath}"', f'"{output_file}"'])
+            cmd.extend([filepath, output_file])
+            #USE FOR DEBUGGING PURPOSES
+            #self.to_screen(f'Executing command: {" ".join(cmd)}')
             subprocess.run(cmd, check=True)
-            return output_file
-        except subprocess.CalledProcessError:
-            return None
+            os.remove(filepath)
+            os.rename(output_file, filepath)
+            return True
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            return False
 
 def setup(downloader, **kwargs):
     downloader.add_post_processor(MP4DecryptPP(downloader, **kwargs))
