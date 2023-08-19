@@ -22,10 +22,10 @@ Don't use the `+` operator when specifying format in `-f "wv+wa"`. Use `,` inste
 
 To use this plugin, make sure you place the `--use-postprocessor` option before any other arguments to avoid any issues. Here are the correct usage instructions:
 
-### Decrypt using a single key:
+### Decrypt using a single decryption_key:
 
 ```shell
-yt-dlp --use-postprocessor MP4Decrypt:key=your_key <video_url>
+yt-dlp --use-postprocessor MP4Decrypt:decryption_key=your_key <video_url>
 ```
 
 Replace `your_key` with your actual decryption key in the format `kid:key`.
